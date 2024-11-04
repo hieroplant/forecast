@@ -26,8 +26,15 @@
                 <div class="flex justify-between items-center mb-4">
                     <h1 class="text-3xl font-bold">Stations for {{ project.name }}</h1>
                     <div>
-                        <button class="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-700">Button
-                            1</button>
+                        <form id="upload-form" method="POST" action="{% url 'upload_config' project.id %}"
+                            enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="file" id="file-input" name="config_file" accept=".xlsm" style="display:none;"
+                                onchange="document.getElementById('upload-form').submit();">
+                            <button type="button"
+                                class="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-700"
+                                onclick="document.getElementById('file-input').click();">Upload config file</button>
+                        </form>
                         <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">Button 2</button>
                     </div>
                 </div>

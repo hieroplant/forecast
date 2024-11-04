@@ -2,12 +2,13 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New Project</title>
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create New Project</title>
+        <script src="{% static 'htmx.min.js' %}" defer></script>
     {% tailwind_css %}
 </head>
 
@@ -15,7 +16,7 @@
     {% include 'siakap/partials/navbar.html' %}
     <div class="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content flex flex-col">
+        <div class="drawer-content flex flex-col p-4">
             <!-- Main content area -->
             <div class="overflow-x-auto p-4">
                 <h1 class="text-3xl font-bold mb-4">Create New Project</h1>
@@ -24,14 +25,23 @@
                     alert("{{ error }}");
                 </script>
                 {% endif %}
-                <form method="POST" action="{% url 'add_project' %}" class="space-y-4">
+                <form method="POST" action="{% url 'add_project' %}" class="space-y-4" hx-post="{% url 'add_project' %}"
+                    hx-target="#project-list" hx-swap="beforeend">
                     {% csrf_token %}
                     <div>
-                        <input type="text" name="name" id="Project Name" class="input input-bordered input-success w-full max-w-xs" placeholder="project name" />
+                        <label for="name" class="block text-sm font-medium text-gray-700">Project Name</label>
+                        <input type="text" name="name" id="name" placeholder="Project Name" required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            hx-get="{% url 'check_project_name' %}" hx-trigger="keyup changed delay:500ms"
+                            hx-target="#name-warning" hx-swap="innerHTML">
                     </div>
+                    <div id="name-warning" class="text-red-600"></div>
                     <div>
-                        <input type="text" name="description" id="Project Description" class="input input-bordered input-success w-full max-w-xs"
-                            placeholder="project description" />
+                        <label for="description" class="block text-sm font-medium text-gray-700">Project
+                            Description</label>
+                        <input type="text" name="description" id="description" placeholder="Project Description"
+                            required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>
                     <button type="submit"
                         class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add
@@ -39,7 +49,7 @@
                 </form>
             </div>
         </div>
-                {% include 'siakap/partials/sidebar.html' %}
+        {% include 'siakap/partials/sidebar.html' %}
     </div>
 </body>
 
