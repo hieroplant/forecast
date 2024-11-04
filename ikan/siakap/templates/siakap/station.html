@@ -18,42 +18,47 @@
 
 <body>
     {% include 'siakap/partials/navbar.html' %}
-    <!-- Sidebar -->
     <div class="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content flex flex-col">
+        <div class="drawer-content flex flex-col p-4">
             <!-- Main content area -->
             <div class="overflow-x-auto">
+                <div class="flex justify-between items-center mb-4">
+                    <h1 class="text-3xl font-bold">Stations for {{ project.name }}</h1>
+                    <div>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-700">Button
+                            1</button>
+                        <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">Button 2</button>
+                    </div>
+                </div>
                 <table class="table">
-                    <!-- head -->
                     <!-- head -->
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Project Title</th>
-                            <th>Project Description</th>
+                            <th>Station Name</th>
+                            <th>Station Description</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for project in projects %}
+                        {% for station in stations %}
                         <tr class="hover:bg-yellow-300">
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ project.name }}</td>
-                            <td>{{ project.description }}</td>
+                            <td>{{ station.name }}</td>
+                            <td>{{ station.description }}</td>
                             <td>
-                                <form method="POST" action="{% url 'delete_project' project.id %}"
-                                    onsubmit="return confirm('Are you sure you want to delete this project?');" style="display:inline;">
+                                <form method="POST" action="{% url 'delete_station' station.id %}"
+                                    onsubmit="return confirm('Are you sure you want to delete this station?');"
+                                    style="display:inline;">
                                     {% csrf_token %}
                                     <button type="submit" class="text-red-600 hover:text-red-900 mr-2">
                                         {% heroicon_outline "trash" %}
                                     </button>
                                 </form>
-                                <form method="GET" action="{% url 'stations' project.id %}" style="display:inline;">
-                                    <button type="submit" class="text-blue-600 hover:text-blue-900">
-                                        {% heroicon_outline "folder-plus" %}
-                                    </button>
-                                </form>
+                                <a href="{% url 'edit_station' station.id %}" class="text-blue-600 hover:text-blue-900">
+                                    {% heroicon_outline "pencil-alt" %}
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}

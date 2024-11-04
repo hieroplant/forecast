@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'siakap',
+    'django_htmx',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 
 ]
 
