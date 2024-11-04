@@ -16,30 +16,56 @@
     {% tailwind_css %}
 </head>
 
-<body class="flex">
-
+<body>
+{% include 'siakap/partials/navbar.html' %}
     <!-- Sidebar -->
     <div class="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
             <!-- Main content area -->
-            <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
-                Open drawer
-            </label>
-
-            <div class="flex-1 p-10">
-                <h1 class="text-3xl font-bold">Main Content Area</h1>
-                <p>This is where your main content will go.</p>
+            <div class="overflow-x-auto">
+                <table class="table">
+                    <!-- head -->
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Job</th>
+                            <th>Favorite Color</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- row 1 -->
+                        <tr class="hover:bg-yellow-300">
+                            <th>1</th>
+                            <td>Cy Ganderton</td>
+                            <td>Quality Control Specialist</td>
+                            <td>Blue</td>
+                        </tr>
+                        <!-- row 2 -->
+                        <tr class="hover:bg-yellow-300">
+                            <th>2</th>
+                            <td>Hart Hagerty</td>
+                            <td>Desktop Support Technician</td>
+                            <td>Purple</td>
+                        </tr>
+                        <!-- row 3 -->
+                        <tr hover:bg-yellow-300>
+                            <th>3</th>
+                            <td>Brice Swyre</td>
+                            <td>Tax Accountant</td>
+                            <td>Red</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="drawer-side">
             <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
             <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                 <!-- Sidebar content here -->
-                <li><a href="#">Sidebar Item 1</a></li>
-                <li><a href="#">Sidebar Item 2</a></li>
-                <li><a href="#">Sidebar Item 3</a></li>
-                <li><a href="#">Sidebar Item 4</a></li>
+
+                <li><a href="#">Create new project</a></li>
             </ul>
         </div>
     </div>
